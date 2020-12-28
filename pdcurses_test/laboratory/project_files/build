@@ -1,0 +1,13 @@
+#!/bin/bash
+
+OUT_FILE=exec
+rm $OUT_FILE
+echo "Compiling $OUT_FILE"
+gcc -pthread -lncurses mover4.c ../can.c kinematic.c ../task_controller.c task_algo.c task_kbrd.c task_display.c task_timer.c ../../can-utils/lib.c -lm -o $OUT_FILE
+#gcc -pthread mover4.c can.o kinematic.c lib.c -o $OUT_FILE
+if [ $? == 1 ]; then
+ exit 2
+fi
+
+echo "Running $OUT_FILE"
+./$OUT_FILE
