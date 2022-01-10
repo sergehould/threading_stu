@@ -33,7 +33,7 @@
 #include <pthread.h>
 
 
-int main(int argc, char **argv){
+int main(void){
 	/* Create and start your threads here */ 
 	return 1;
 	
