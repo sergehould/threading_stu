@@ -1,11 +1,18 @@
 ﻿  ncurses_init.c
-C:\serge\Vanier\courses\247-607-VA_Computerized Systems Optimization\projects\visual_studio\threading_stu\pdcurses_test\include\curses.h(160,1): warning C4005: 'MOUSE_MOVED': macro redefinition
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um\wincontypes.h(103): message : see previous definition of 'MOUSE_MOVED'
+C:\Users\houlds\Documents\tempo\threading_stu\pdcurses_test\include\curses.h(160,1): warning C4005: 'MOUSE_MOVED': macro redefinition
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\wincontypes.h(103): message : see previous definition of 'MOUSE_MOVED'
+C:\Users\houlds\Documents\tempo\threading_stu\pdcurses_test\laboratory\ncurses_init.c(52,13): warning C4101: 'height': unreferenced local variable
+C:\Users\houlds\Documents\tempo\threading_stu\pdcurses_test\laboratory\ncurses_init.c(52,6): warning C4101: 'width': unreferenced local variable
+C:\Users\houlds\Documents\tempo\threading_stu\pdcurses_test\laboratory\ncurses_init.c(50,10): warning C4101: 'stdstr': unreferenced local variable
+C:\Users\houlds\Documents\tempo\threading_stu\pdcurses_test\laboratory\ncurses_init.c(66,13): warning C4101: 'height': unreferenced local variable
+C:\Users\houlds\Documents\tempo\threading_stu\pdcurses_test\laboratory\ncurses_init.c(66,6): warning C4101: 'width': unreferenced local variable
+C:\Users\houlds\Documents\tempo\threading_stu\pdcurses_test\laboratory\ncurses_init.c(64,10): warning C4101: 'stdstr': unreferenced local variable
+C:\Users\houlds\Documents\tempo\threading_stu\pdcurses_test\laboratory\ncurses_init.c(79,10): warning C4101: 'stdstr': unreferenced local variable
   main.c
-C:\serge\Vanier\courses\247-607-VA_Computerized Systems Optimization\projects\visual_studio\threading_stu\pdcurses_test\include\curses.h(160,1): warning C4005: 'MOUSE_MOVED': macro redefinition
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um\wincontypes.h(103): message : see previous definition of 'MOUSE_MOVED'
+C:\Users\houlds\Documents\tempo\threading_stu\pdcurses_test\include\curses.h(160,1): warning C4005: 'MOUSE_MOVED': macro redefinition
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\wincontypes.h(103): message : see previous definition of 'MOUSE_MOVED'
   .NETFramework,Version=v4.0.AssemblyAttributes.cpp
   Generating Code...
   ncurses_init.obj : /DEBUG:FASTLINK is not supported when managed code is present; restarting link with /DEBUG:FULL
   ncurses_init.obj : MSIL module encountered; incremental linking is disabled for MSIL; performing full link
-  pdcurses_test.vcxproj -> C:\serge\Vanier\courses\247-607-VA_Computerized Systems Optimization\projects\visual_studio\threading_stu\Debug\pdcurses_test.exe
+  pdcurses_test.vcxproj -> C:\Users\houlds\Documents\tempo\threading_stu\Debug\pdcurses_test.exe
