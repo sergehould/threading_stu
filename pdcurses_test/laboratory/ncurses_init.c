@@ -4,10 +4,9 @@
 *
 *	Author				Date			Version
 *	Serge Hould			27 Dec. 2020	1.0.0
+*	Serge Hould			May 2023		1.1.0	Add height_get(), width_get() and screen_init()
 *
 *****************************************************************************/
-
-
  
  #ifdef _WIN32
 #include <Windows.h>
@@ -18,8 +17,8 @@
 #include <sys/ioctl.h>
 #endif
 
-#include "../laboratory/header/public.h"
-#include "../laboratory/header/ncurses_init.h"
+#include "header/public.h"
+#include "header/ncurses_init.h"
 #include <math.h>	
 #include <stdio.h>
 #include <stdlib.h>
@@ -35,7 +34,7 @@
 #include <pthread.h>
 
 /* Initializes Ncurses*/
-void init_ncurses(void) {
+void ncurses_init(void) {
 	/*Ncurse config */
 	initscr();			/* Start curses mode 		  */
 	keypad(stdscr, TRUE);  // enable keyboard mapping
@@ -53,3 +52,73 @@ void init_ncurses(void) {
 	//attron(COLOR_PAIR(3)); // BLUE
 }
 
+/* Returns the width of the screen */
+int width_get(void) {
+	/*keyboard*/
+	initscr();
+	WINDOW* stdstr;
+
+	int width, height;
+	CONSOLE_SCREEN_BUFFER_INFOEX consolesize;
+	consolesize.cbSize = sizeof(consolesize);
+	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+	GetConsoleScreenBufferInfoEx(hConsole, &consolesize);
+	auto largest_size{ GetLargestConsoleWindowSize(hConsole) };
+	return largest_size.X - 1;
+}
+
+/* Returns the heigth of the screen */
+int height_get(void) {
+	/*keyboard*/
+	initscr();
+	WINDOW* stdstr;
+
+	int width, height;
+	CONSOLE_SCREEN_BUFFER_INFOEX consolesize;
+	consolesize.cbSize = sizeof(consolesize);
+	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+	GetConsoleScreenBufferInfoEx(hConsole, &consolesize);
+	auto largest_size{ GetLargestConsoleWindowSize(hConsole) };
+	return largest_size.Y - 1;
+}
+
+//#define FULL_SCREEN
+
+/* Initializes the screen to its maximum size*/
+void screen_init(void) {
+	initscr();
+	WINDOW* stdstr;
+
+	system("mode 650");
+	int width, height;
+	CONSOLE_SCREEN_BUFFER_INFOEX consolesize;
+	consolesize.cbSize = sizeof(consolesize);
+	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+	GetConsoleScreenBufferInfoEx(hConsole, &consolesize);
+	auto largest_size{ GetLargestConsoleWindowSize(hConsole) };
+	if (!largest_size.X && !largest_size.Y) {
+		//std::cerr << "GetLargestConsoleWindowSize() failed with \"" << get_last_error_msg() << "\" :(\n\n";
+		//return false;
+	}
+
+
+	--largest_size.X;
+	--largest_size.Y;
+
+	COORD c;
+	c.X = largest_size.X;
+	c.Y = largest_size.Y;
+	////c.X = width;
+	////c.Y = height;
+	consolesize.dwSize = c;
+	width = largest_size.X;;
+	height = largest_size.Y;
+
+	//SetConsoleScreenBufferInfoEx(hConsole, &consolesize);
+	SetConsoleScreenBufferSize(hConsole, largest_size);
+	//SetConsoleScreenBufferSize(hConsole, c);
+	//SetConsoleDisplayMode(hConsole, CONSOLE_FULLSCREEN_MODE, &c);
+	//keypad(stdstr, TRUE);
+
+
+}
