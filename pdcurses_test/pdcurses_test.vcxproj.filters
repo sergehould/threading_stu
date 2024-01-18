@@ -26,7 +26,7 @@
     <ClCompile Include="laboratory\ncurses_init.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="laboratory\project_files\main.c">
+    <ClCompile Include="laboratory\project_files\main_lab1.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

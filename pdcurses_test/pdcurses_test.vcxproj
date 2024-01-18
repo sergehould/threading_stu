@@ -23,7 +23,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="laboratory\ncurses_init.c" />
-    <ClCompile Include="laboratory\project_files\main.c" />
+    <ClCompile Include="laboratory\project_files\main_lab1.c" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{BF1D08CF-009C-495E-BBF6-34D1C4AE76FD}</ProjectGuid>
