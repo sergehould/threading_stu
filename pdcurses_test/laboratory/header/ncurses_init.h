@@ -9,6 +9,9 @@
 
 #ifndef	NCURSE_INIT_H
 #define NCURSE_INIT_H
+#ifdef	__cplusplus
+extern "C" {
+#endif
 
 #define	WHITE_BLACK		COLOR_PAIR(1)
 #define	RED_WHITE		COLOR_PAIR(2)
@@ -19,5 +22,11 @@
 #define	BLUE_BLACK		COLOR_PAIR(7)
 
 /*Prototype Area*/
-void init_ncurses(void);
+void ncurses_init(void);
+int width_get(void);
+int height_get(void);
+void screen_init(void);
+#ifdef	__cplusplus
+}
+#endif
 #endif
