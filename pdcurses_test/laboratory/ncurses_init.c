@@ -8,15 +8,8 @@
 *
 *****************************************************************************/
  
- #ifdef _WIN32
+
 #include <Windows.h>
-
-#else
-#include <unistd.h>
-#include <ncurses.h>
-#include <sys/ioctl.h>
-#endif
-
 #include "header/public.h"
 #include "header/ncurses_init.h"
 #include <math.h>	
@@ -49,12 +42,10 @@ void ncurses_init(void) {
 	init_pair(5, COLOR_RED, COLOR_BLACK);
 	init_pair(6, COLOR_GREEN, COLOR_BLACK);
 	init_pair(7, COLOR_BLUE, COLOR_BLACK);
-	//attron(COLOR_PAIR(3)); // BLUE
 }
 
 /* Returns the width of the screen */
 int width_get(void) {
-	/*keyboard*/
 	initscr();
 	WINDOW* stdstr;
 
@@ -69,7 +60,6 @@ int width_get(void) {
 
 /* Returns the heigth of the screen */
 int height_get(void) {
-	/*keyboard*/
 	initscr();
 	WINDOW* stdstr;
 
@@ -82,7 +72,6 @@ int height_get(void) {
 	return largest_size.Y - 1;
 }
 
-//#define FULL_SCREEN
 
 /* Initializes the screen to its maximum size*/
 void screen_init(void) {
@@ -97,8 +86,7 @@ void screen_init(void) {
 	GetConsoleScreenBufferInfoEx(hConsole, &consolesize);
 	auto largest_size{ GetLargestConsoleWindowSize(hConsole) };
 	if (!largest_size.X && !largest_size.Y) {
-		//std::cerr << "GetLargestConsoleWindowSize() failed with \"" << get_last_error_msg() << "\" :(\n\n";
-		//return false;
+
 	}
 
 
@@ -108,17 +96,14 @@ void screen_init(void) {
 	COORD c;
 	c.X = largest_size.X;
 	c.Y = largest_size.Y;
-	////c.X = width;
-	////c.Y = height;
+
 	consolesize.dwSize = c;
 	width = largest_size.X;;
 	height = largest_size.Y;
 
-	//SetConsoleScreenBufferInfoEx(hConsole, &consolesize);
+
 	SetConsoleScreenBufferSize(hConsole, largest_size);
-	//SetConsoleScreenBufferSize(hConsole, c);
-	//SetConsoleDisplayMode(hConsole, CONSOLE_FULLSCREEN_MODE, &c);
-	//keypad(stdstr, TRUE);
+
 
 
 }
