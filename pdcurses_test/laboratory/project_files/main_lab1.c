@@ -6,16 +6,8 @@
 *****************************************************************************/
 
 
-#ifdef _WIN32
-#include <Windows.h>
-#else
-#include <unistd.h>
-#include <ncurses.h>
-#include <sys/ioctl.h>
- //#include <sys/time.h>
- //#include <libgen.h>
-#endif
 
+#include <Windows.h>
 #include "../header/public.h"
 #include "../header/ncurses_init.h"
 #include <stdio.h>
