@@ -5,6 +5,7 @@
 *	Author				Date			Version
 *	Serge Hould			27 Dec. 2020	1.0.0
 *	Serge Hould			May 2023		1.1.0	Add height_get(), width_get() and screen_init()
+* *	Serge Hould			May 2024		1.2.0	Add mutex protected mvprintw_m()
 *
 *****************************************************************************/
  
@@ -25,7 +26,7 @@
 #define HAVE_STRUCT_TIMESPEC  // for win32 only. Because TIMESPEC is re-defined inside pthread.h
 #endif
 #include <pthread.h>
-
+static pthread_mutex_t mutex_print = PTHREAD_MUTEX_INITIALIZER; // warning messages
 /* Initializes Ncurses*/
 void ncurses_init(void) {
 	/*Ncurse config */
@@ -36,12 +37,29 @@ void ncurses_init(void) {
 	noecho();        // do not echo input
 	start_color();
 	init_pair(1, COLOR_WHITE, COLOR_BLACK);
-	init_pair(2, COLOR_RED, COLOR_WHITE);
-	init_pair(3, COLOR_GREEN, COLOR_WHITE);
-	init_pair(4, COLOR_BLUE, COLOR_WHITE);
-	init_pair(5, COLOR_RED, COLOR_BLACK);
-	init_pair(6, COLOR_GREEN, COLOR_BLACK);
-	init_pair(7, COLOR_BLUE, COLOR_BLACK);
+	init_pair(2, COLOR_RED, COLOR_BLACK);
+	init_pair(3, COLOR_GREEN, COLOR_BLACK);
+	init_pair(4, COLOR_BLUE, COLOR_BLACK);
+	init_pair(5, COLOR_YELLOW, COLOR_BLACK);
+	init_pair(6, COLOR_MAGENTA, COLOR_BLACK);
+	init_pair(7, COLOR_CYAN, COLOR_BLACK);
+
+	init_pair(8, COLOR_BLACK, COLOR_WHITE);
+	init_pair(9, COLOR_RED, COLOR_WHITE);
+	init_pair(10, COLOR_GREEN, COLOR_WHITE);
+	init_pair(11, COLOR_BLUE, COLOR_WHITE);
+	init_pair(12, COLOR_YELLOW, COLOR_WHITE);
+	init_pair(13, COLOR_MAGENTA, COLOR_WHITE);
+	init_pair(14, COLOR_CYAN, COLOR_WHITE);
+
+	init_pair(15, COLOR_BLACK, COLOR_YELLOW);
+	init_pair(16, COLOR_RED, COLOR_YELLOW);
+	init_pair(17, COLOR_GREEN, COLOR_YELLOW);
+	init_pair(18, COLOR_BLUE, COLOR_YELLOW);
+	init_pair(19, COLOR_WHITE, COLOR_YELLOW);
+	init_pair(20, COLOR_MAGENTA, COLOR_YELLOW);
+	init_pair(21, COLOR_CYAN, COLOR_YELLOW);
+	
 }
 
 /* Returns the width of the screen */
@@ -103,7 +121,19 @@ void screen_init(void) {
 
 
 	SetConsoleScreenBufferSize(hConsole, largest_size);
+}
 
-
-
+void mvprintw_m(int col, int l, int c, const char* format, ...) {
+	char buf[512];
+	va_list vl;
+	va_start(vl, format);
+	vsnprintf(buf, 511, format, vl);
+	va_end(vl);
+	//mutex lock
+	pthread_mutex_lock(&mutex_print);
+	attron(col);
+	mvprintw(l, c, "%s", buf);
+	attroff(col);
+	//mutex unlock
+	pthread_mutex_unlock(&mutex_print);
 }
